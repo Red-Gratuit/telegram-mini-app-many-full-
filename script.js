@@ -25,6 +25,9 @@ const reviewsGrid = document.getElementById('reviewsGrid');
 const adminReviewSection = document.getElementById('adminReviewSection');
 const adminReviewsList = document.getElementById('adminReviewsList');
 
+const adminProductsSection = document.getElementById('adminProductsSection');
+const adminProductsList = document.getElementById('adminProductsList');
+
 if (year) {
   year.textContent = new Date().getFullYear();
 }
@@ -126,6 +129,40 @@ async function loadProducts() {
     if (productsGrid) {
       productsGrid.innerHTML = '<p>Impossible de charger les produits.</p>';
     }
+  }
+}
+
+async function loadAdminProducts() {
+  if (!adminProductsList) return;
+
+  try {
+    const response = await fetch('/api/products');
+    if (!response.ok) throw new Error('Failed to load admin products');
+    const products = await response.json();
+
+    if (!products.length) {
+      adminProductsList.innerHTML = '<p>Aucun produit à supprimer.</p>';
+      return;
+    }
+
+    adminProductsList.innerHTML = '';
+    products.forEach((product) => {
+      const item = document.createElement('div');
+      item.className = 'admin-product-item';
+      item.innerHTML = `
+        <div class="admin-product-main">
+          <div class="admin-product-emoji">${product.emoji || '🛍️'}</div>
+          <div class="admin-product-text">
+            <strong>${product.name}</strong>
+            <span>${Number(product.price).toFixed(2)}€</span>
+          </div>
+        </div>
+        <button class="btn secondary delete-product-btn" data-id="${product.id}">Supprimer</button>
+      `;
+      adminProductsList.appendChild(item);
+    });
+  } catch (error) {
+    adminProductsList.innerHTML = '<p>Impossible de charger les produits.</p>';
   }
 }
 
@@ -244,9 +281,15 @@ if (openAdmin && adminModal && closeAdmin && adminCodeForm && adminProductForm) 
       adminError.textContent = '';
       adminCodeForm.classList.add('hidden');
       adminProductForm.classList.remove('hidden');
+
+      if (adminProductsSection) {
+        adminProductsSection.classList.remove('hidden');
+      }
       if (adminReviewSection) {
         adminReviewSection.classList.remove('hidden');
       }
+
+      loadAdminProducts();
     } else {
       adminError.textContent = 'Code incorrect';
     }
@@ -323,6 +366,29 @@ if (openAdmin && adminModal && closeAdmin && adminCodeForm && adminProductForm) 
     }
   });
 
+  adminProductsList?.addEventListener('click', async (e) => {
+    const button = e.target.closest('.delete-product-btn');
+    if (!button) return;
+
+    const productId = button.dataset.id;
+
+    try {
+      const response = await fetch(`/api/products/${productId}`, {
+        method: 'DELETE'
+      });
+      const result = await response.json();
+
+      if (result.success) {
+        await loadProducts();
+        await loadAdminProducts();
+      } else {
+        alert(result.message || 'Erreur lors de la suppression');
+      }
+    } catch (error) {
+      alert('Erreur lors de la suppression');
+    }
+  });
+
   adminReviewsList?.addEventListener('click', async (e) => {
     const button = e.target.closest('.delete-review-btn');
     if (!button) return;
@@ -385,3 +451,152 @@ buttons.forEach((button) => {
     button.style.transform = 'translateY(0)';
   });
 });
+
+/* =========================
+   Musique de fond (audio loop)
+========================= */
+const bgMusic = document.getElementById('bgMusic');
+const bgAudioWidget = document.getElementById('bgAudioWidget');
+const bgAudioToggle = document.getElementById('bgAudioToggle');
+const bgAudioPause = document.getElementById('bgAudioPause');
+const bgAudioStop = document.getElementById('bgAudioStop');
+const bgAudioStatus = document.getElementById('bgAudioStatus');
+const bgVolume = document.getElementById('bgVolume');
+
+function setWidgetState({ playing }) {
+  if (!bgAudioToggle || !bgAudioPause || !bgAudioStop || !bgAudioStatus) return;
+
+  if (playing) {
+    bgAudioToggle.textContent = '🔇 Couper';
+    bgAudioToggle.classList.add('is-playing');
+    bgAudioPause.disabled = false;
+    bgAudioStop.disabled = false;
+    bgAudioStatus.textContent = 'Musique en lecture';
+  } else {
+    bgAudioToggle.textContent = '🔊 Activer';
+    bgAudioToggle.classList.remove('is-playing');
+    bgAudioPause.disabled = true;
+    bgAudioStop.disabled = true;
+    bgAudioStatus.textContent = 'Musique inactive';
+  }
+}
+
+function getSavedVolume() {
+  const v = localStorage.getItem('bgVolume');
+  const num = Number(v);
+  if (Number.isFinite(num)) return Math.min(100, Math.max(0, num));
+  return 30;
+}
+
+function applyVolumeFromUI() {
+  if (!bgMusic || !bgVolume) return;
+  const v = Number(bgVolume.value) / 100;
+  bgMusic.volume = Number.isFinite(v) ? v : 0.3;
+}
+
+function tryPlay() {
+  if (!bgMusic) return;
+
+  applyVolumeFromUI();
+  setWidgetState({ playing: false });
+
+  const playPromise = bgMusic.play();
+  if (playPromise && typeof playPromise.then === 'function') {
+    playPromise
+      .then(() => {
+        // Certains navigateurs "play" mais mettent pause immédiate si autoplay bloqué.
+        setWidgetState({ playing: !bgMusic.paused });
+      })
+      .catch(() => {
+        // Bloqué par politique d'autoplay
+        setWidgetState({ playing: false });
+        if (bgAudioStatus) bgAudioStatus.textContent = 'Clique sur "Activer" pour démarrer';
+      });
+  }
+}
+
+function stopMusic() {
+  if (!bgMusic) return;
+  try {
+    bgMusic.pause();
+    bgMusic.currentTime = 0;
+  } catch {
+    // ignore
+  }
+  setWidgetState({ playing: false });
+}
+
+function pauseMusic() {
+  if (!bgMusic) return;
+  try {
+    bgMusic.pause();
+  } catch {
+    // ignore
+  }
+  setWidgetState({ playing: false });
+}
+
+if (bgMusic && bgAudioWidget) {
+  // Volume initial depuis stockage
+  if (bgVolume) bgVolume.value = String(getSavedVolume());
+  applyVolumeFromUI();
+
+  // Si audio se lance / pause via évènements
+  bgMusic.addEventListener('play', () => setWidgetState({ playing: true }));
+  bgMusic.addEventListener('pause', () => setWidgetState({ playing: false }));
+  bgMusic.addEventListener('ended', () => setWidgetState({ playing: false }));
+
+  // Débloquer au premier clic/tap (autoplay policy) pour lancer la musique au 1er "clique"
+  let audioUnlocked = false;
+
+  window.addEventListener(
+    'pointerdown',
+    () => {
+      if (audioUnlocked) return;
+      // Si l'audio est déjà en lecture (ou prêt à être en lecture), ne rien faire.
+      if (!bgMusic || !bgMusic.paused) return;
+
+      audioUnlocked = true;
+      tryPlay();
+    },
+    { once: true }
+  );
+
+  if (bgAudioToggle) {
+    bgAudioToggle.addEventListener('click', () => {
+      const shouldBePlaying = bgMusic.paused || bgMusic.ended;
+
+      if (!shouldBePlaying) {
+        stopMusic();
+        return;
+      }
+
+      tryPlay();
+    });
+  }
+
+  if (bgAudioPause) {
+    bgAudioPause.addEventListener('click', () => pauseMusic());
+  }
+
+  if (bgAudioStop) {
+    bgAudioStop.addEventListener('click', () => {
+      // Stop/reprendre
+      if (!bgMusic.paused && bgMusic.currentTime > 0) {
+        stopMusic();
+      } else {
+        tryPlay();
+      }
+    });
+  }
+
+  if (bgVolume) {
+    bgVolume.addEventListener('input', () => {
+      applyVolumeFromUI();
+      localStorage.setItem('bgVolume', String(bgVolume.value));
+    });
+  }
+
+  // Etat initial
+  setWidgetState({ playing: false });
+}

@@ -208,11 +208,47 @@
           <button type="submit" class="btn primary">Ajouter le produit</button>
         </form>
 
+        <div id="adminProductsSection" class="admin-products-section hidden">
+          <h4>Supprimer les produits</h4>
+          <div id="adminProductsList" class="admin-products-list"></div>
+        </div>
+
         <div id="adminReviewSection" class="admin-review-section hidden">
           <h4>Gérer les avis</h4>
           <div id="adminReviewsList" class="admin-reviews-list"></div>
         </div>
       </div>
+    </div>
+
+    <!-- Audio de fond -->
+    <audio
+      id="bgMusic"
+      loop
+      preload="auto"
+      src="audio/background.mp3"
+      aria-label="Musique de fond"
+    ></audio>
+
+    <div class="bg-audio-widget" id="bgAudioWidget" aria-live="polite">
+      <button class="bg-audio-btn" id="bgAudioToggle" type="button" title="Activer/Désactiver la musique">
+        🔊 Activer
+      </button>
+
+      <div class="bg-audio-controls">
+        <button class="bg-audio-btn" id="bgAudioPause" type="button" title="Pause" disabled>
+          ⏸️ Pause
+        </button>
+        <button class="bg-audio-btn" id="bgAudioStop" type="button" title="Stop / Reprendre" disabled>
+          ⏹️ Stop
+        </button>
+
+        <div class="bg-audio-volume">
+          <label for="bgVolume">Volume</label>
+          <input id="bgVolume" type="range" min="0" max="100" value="30" />
+        </div>
+      </div>
+
+      <div class="bg-audio-status" id="bgAudioStatus">Musique inactive</div>
     </div>
 
     <script src="script.js"></script>

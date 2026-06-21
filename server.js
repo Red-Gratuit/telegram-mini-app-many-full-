@@ -122,6 +122,19 @@ app.delete('/api/reviews/:id', (req, res) => {
   res.json({ success: true });
 });
 
+app.delete('/api/products/:id', (req, res) => {
+  const productId = Number(req.params.id);
+  const products = loadProducts();
+  const filtered = products.filter((product) => product.id !== productId);
+
+  if (filtered.length === products.length) {
+    return res.status(404).json({ success: false, message: 'Produit introuvable' });
+  }
+
+  saveProducts(filtered);
+  res.json({ success: true });
+});
+
 app.get('/uploads/:file', (req, res) => {
   const filePath = path.join(uploadDir, req.params.file);
   if (!fs.existsSync(filePath)) {
