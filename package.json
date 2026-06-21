@@ -1,0 +1,13 @@
+{
+  "name": "pulsecart-admin",
+  "version": "1.0.0",
+  "description": "PulseCart backend with admin product management",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "multer": "^2.2.0"
+  }
+}

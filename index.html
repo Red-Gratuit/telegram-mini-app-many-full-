@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PulseCart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="background-orb orb-1"></div>
+    <div class="background-orb orb-2"></div>
+    <div class="background-orb orb-3"></div>
+
+    <div class="noise"></div>
+
+    <header class="top-nav">
+      <div class="nav-brand">
+        <div class="brand-icon">P</div>
+        <span>PulseCart</span>
+      </div>
+      <nav>
+        <a href="#features">Fonctionnalités</a>
+        <a href="boutique.html">Boutique</a>
+        <a href="avis.html">Avis</a>
+      </nav>
+      <button class="nav-btn admin-btn" id="openAdmin">Admin</button>
+      <a class="nav-btn" href="boutique.html">Explorer</a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-text">
+          <span class="pill">🚀 Nouvelle façon de shopper</span>
+          <h1>
+            Achetez vos produits <span>en quelques secondes</span>
+          </h1>
+          <p>
+            Une mini app Telegram ultra rapide pour commander vos articles préférés,
+            suivre vos livraisons et profiter d’offres exclusives.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="boutique.html">Voir les produits</a>
+            <a class="btn secondary" href="#features">Voir les avantages</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-card">
+              <strong data-count="120">0</strong>
+              <span>Produits</span>
+            </div>
+            <div class="stat-card">
+              <strong data-count="98">0</strong>
+              <span>% satisfaction</span>
+            </div>
+            <div class="stat-card">
+              <strong>10H → 00H</strong>
+              <span>Lun. au Dim. • H24</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen glass-panel">
+              <div class="screen-top">
+                <div>
+                  <p>Bonjour 👋</p>
+                  <h3>PulseCart</h3>
+                </div>
+                <div class="avatar">P</div>
+              </div>
+
+              <div class="search-pill">Rechercher un produit</div>
+
+              <div class="product-highlight">
+                <div>
+                  <span class="tag">Promo</span>
+                  <h4>AirPods Pro</h4>
+                  <p>Écouteurs sans fil</p>
+                </div>
+                <span class="price">199€</span>
+              </div>
+
+              <div class="mini-cards">
+                <div class="mini-card active">
+                  <span>📱</span>
+                  <p>Électronique</p>
+                </div>
+                <div class="mini-card">
+                  <span>👟</span>
+                  <p>Mode</p>
+                </div>
+                <div class="mini-card">
+                  <span>🏠</span>
+                  <p>Maison</p>
+                </div>
+              </div>
+
+              <div class="product-row">
+                <div class="product-tile">
+                  <div class="tile-icon">⌚</div>
+                  <h5>Montre</h5>
+                  <span>129€</span>
+                </div>
+                <div class="product-tile">
+                  <div class="tile-icon">🎧</div>
+                  <h5>Casque</h5>
+                  <span>89€</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="features">
+        <div class="section-heading">
+          <span class="pill small">Pourquoi choisir</span>
+          <h2>Une expérience shopping fluide</h2>
+        </div>
+
+        <div class="category-strip">
+          <button class="category-bubble category-hard active" data-category="dur">
+            <span>⚡</span>
+            <strong>Dur</strong>
+          </button>
+          <button class="category-bubble category-soft" data-category="doux">
+            <span>✨</span>
+            <strong>Doux</strong>
+          </button>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-card glass-panel" data-category="dur">
+            <div class="feature-icon">⚡</div>
+            <h3>Commande instantanée</h3>
+            <p>Toute commande passe par Telegram, en un clic et sans complication.</p>
+          </div>
+          <div class="feature-card glass-panel" data-category="doux">
+            <div class="feature-icon">🛡️</div>
+            <h3>Paiement sécurisé</h3>
+            <p>Transactions protégées avec suivi complet de votre commande.</p>
+          </div>
+          <div class="feature-card glass-panel" data-category="dur">
+            <div class="feature-icon">📦</div>
+            <h3>Suivi en temps réel</h3>
+            <p>Recevez des mises à jour automatiques sur votre livraison.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="shop" class="shop">
+        <div class="shop-panel glass-panel empty-shop-panel">
+          <div class="shop-text">
+            <span class="pill small">Boutique</span>
+            <h2>Votre collection</h2>
+            <p>Ajoutez vos produits ici lorsque vous êtes prêt.</p>
+          </div>
+          <div class="empty-shop-state">
+            <div class="empty-shop-icon">🛍️</div>
+            <p>Aucun produit pour le moment</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="reviews" class="reviews">
+        <div class="section-heading">
+          <span class="pill small">Témoignages</span>
+          <h2>Ce que disent nos clients</h2>
+        </div>
+        <div class="review-grid">
+          <div class="review-card glass-panel">
+            <p>“Le flux est incroyablement fluide. J’ai commandé en 2 minutes.”</p>
+            <div>
+              <strong>Sarah M.</strong>
+              <span>Client premium</span>
+            </div>
+          </div>
+          <div class="review-card glass-panel">
+            <p>“Les notifications de livraison sont parfaites et très claires.”</p>
+            <div>
+              <strong>Ahmed K.</strong>
+              <span>Entrepreneur</span>
+            </div>
+          </div>
+          <div class="review-card glass-panel">
+            <p>“Le design est magnifique et l’app fonctionne sans bug sur mobile.”</p>
+            <div>
+              <strong>Julie D.</strong>
+              <span>Créatrice de contenu</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-section">
+        <div class="cta-card glass-panel">
+          <h2>Prêt à découvrir les meilleures offres ?</h2>
+          <p>Explorez la boutique, choisissez vos produits préférés et profitez d’un shopping fluide.</p>
+          <a class="btn primary" href="#features">Découvrir l’expérience</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© <span id="year"></span> PulseCart — Commerce mobile premium</p>
+    </footer>
+
+    <div class="admin-modal" id="adminModal">
+      <div class="admin-panel glass-panel">
+        <button class="admin-close" id="closeAdmin" aria-label="Fermer">×</button>
+        <h3>Panel Admin</h3>
+        <form id="adminCodeForm" class="admin-form">
+          <label for="adminCode">Code d’accès</label>
+          <input id="adminCode" type="password" placeholder="Entrez le code" />
+          <button type="submit" class="btn primary">Entrer</button>
+        </form>
+        <p class="admin-error" id="adminError"></p>
+
+        <form id="adminProductForm" class="admin-form hidden">
+          <label for="productName">Nom du produit</label>
+          <input id="productName" type="text" placeholder="Ex: AirPods Pro" required />
+
+          <label for="productPrice">Prix (€)</label>
+          <input id="productPrice" type="number" min="0" step="0.01" placeholder="99.99" required />
+
+          <label for="productEmoji">Emoji</label>
+          <input id="productEmoji" type="text" maxlength="2" placeholder="📱" required />
+
+          <label for="productCategory">Catégorie</label>
+          <select id="productCategory">
+            <option value="dur">Dur</option>
+            <option value="doux">Doux</option>
+          </select>
+
+          <label for="productDescription">Description</label>
+          <textarea id="productDescription" rows="3" placeholder="Description courte du produit"></textarea>
+
+          <label for="productMedia">Photo ou vidéo (depuis la galerie)</label>
+          <input id="productMedia" type="file" accept="image/*,video/*" />
+
+          <div class="media-preview" id="mediaPreview"></div>
+
+          <button type="submit" class="btn primary">Ajouter le produit</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
