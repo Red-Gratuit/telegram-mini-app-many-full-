@@ -19,19 +19,20 @@
     <header class="top-nav">
       <div class="nav-brand">
         <div class="brand-icon">P</div>
-        <span>PulseCart</span>
+        <span id="navBrandName">PulseCart</span>
       </div>
       <nav>
+        <a href="#home">Accueil</a>
         <a href="#features">Fonctionnalités</a>
-        <a href="boutique.html">Boutique</a>
-        <a href="avis.html">Avis</a>
+        <a href="#page-boutique">Boutique</a>
+        <a href="#page-avis">Avis</a>
       </nav>
       <button class="nav-btn admin-btn" id="openAdmin">Admin</button>
-      <a class="nav-btn" href="boutique.html">Explorer</a>
+      <a class="nav-btn" href="#page-boutique">Explorer</a>
     </header>
 
     <main>
-      <section class="hero">
+      <section id="home" class="hero">
         <div class="hero-text">
           <span class="pill">🚀 Nouvelle façon de shopper</span>
           <h1>
@@ -39,10 +40,11 @@
           </h1>
           <p>
             Une mini app Telegram ultra rapide pour commander vos articles préférés,
-            suivre vos livraisons et profiter d’offres exclusives.
+            suivre vos livraisons et profiter des nouveaux produits en avance 
+            Toujours imiter Jamais égalé.
           </p>
           <div class="hero-actions">
-            <a class="btn primary" href="boutique.html">Voir les produits</a>
+            <a class="btn primary" href="#page-boutique">Voir les produits</a>
             <a class="btn secondary" href="#features">Voir les avantages</a>
           </div>
           <div class="hero-stats">
@@ -68,7 +70,7 @@
               <div class="screen-top">
                 <div>
                   <p>Bonjour 👋</p>
-                  <h3>PulseCart</h3>
+                  <h3 id="phoneBrandName">PulseCart</h3>
                 </div>
                 <div class="avatar">P</div>
               </div>
@@ -77,26 +79,10 @@
 
               <div class="product-highlight">
                 <div>
-                  <span class="tag">Promo</span>
-                  <h4>AirPods Pro</h4>
-                  <p>Écouteurs sans fil</p>
+                  <h4>Produit phare</h4>
+                  <p>Sélection du moment</p>
                 </div>
                 <span class="price">199€</span>
-              </div>
-
-              <div class="mini-cards">
-                <div class="mini-card active">
-                  <span>📱</span>
-                  <p>Électronique</p>
-                </div>
-                <div class="mini-card">
-                  <span>👟</span>
-                  <p>Mode</p>
-                </div>
-                <div class="mini-card">
-                  <span>🏠</span>
-                  <p>Maison</p>
-                </div>
               </div>
 
               <div class="product-row">
@@ -122,29 +108,18 @@
           <h2>Une expérience shopping fluide</h2>
         </div>
 
-        <div class="category-strip">
-          <button class="category-bubble category-hard active" data-category="dur">
-            <span>⚡</span>
-            <strong>Dur</strong>
-          </button>
-          <button class="category-bubble category-soft" data-category="doux">
-            <span>✨</span>
-            <strong>Doux</strong>
-          </button>
-        </div>
-
         <div class="feature-grid">
-          <div class="feature-card glass-panel" data-category="dur">
+          <div class="feature-card glass-panel">
             <div class="feature-icon">⚡</div>
             <h3>Commande instantanée</h3>
             <p>Toute commande passe par Telegram, en un clic et sans complication.</p>
           </div>
-          <div class="feature-card glass-panel" data-category="doux">
+          <div class="feature-card glass-panel">
             <div class="feature-icon">🛡️</div>
             <h3>Paiement sécurisé</h3>
             <p>Transactions protégées avec suivi complet de votre commande.</p>
           </div>
-          <div class="feature-card glass-panel" data-category="dur">
+          <div class="feature-card glass-panel">
             <div class="feature-icon">📦</div>
             <h3>Suivi en temps réel</h3>
             <p>Recevez des mises à jour automatiques sur votre livraison.</p>
@@ -152,51 +127,37 @@
         </div>
       </section>
 
-      <section id="shop" class="shop">
+      <section id="page-boutique" class="shop">
         <div class="shop-panel glass-panel empty-shop-panel">
           <div class="shop-text">
             <span class="pill small">Boutique</span>
             <h2>Votre collection</h2>
             <p>Ajoutez vos produits ici lorsque vous êtes prêt.</p>
           </div>
-          <div class="empty-shop-state">
-            <div class="empty-shop-icon">🛍️</div>
-            <p>Aucun produit pour le moment</p>
-          </div>
+          <div id="productsGrid" class="shop-cards"></div>
         </div>
       </section>
 
-      <section id="reviews" class="reviews">
+      <section id="page-avis" class="reviews">
         <div class="section-heading">
           <span class="pill small">Témoignages</span>
           <h2>Ce que disent nos clients</h2>
         </div>
-        <div class="review-grid">
-          <div class="review-card glass-panel">
-            <p>“Le flux est incroyablement fluide. J’ai commandé en 2 minutes.”</p>
-            <div>
-              <strong>Sarah M.</strong>
-              <span>Client premium</span>
-            </div>
-          </div>
-          <div class="review-card glass-panel">
-            <p>“Les notifications de livraison sont parfaites et très claires.”</p>
-            <div>
-              <strong>Ahmed K.</strong>
-              <span>Entrepreneur</span>
-            </div>
-          </div>
-          <div class="review-card glass-panel">
-            <p>“Le design est magnifique et l’app fonctionne sans bug sur mobile.”</p>
-            <div>
-              <strong>Julie D.</strong>
-              <span>Créatrice de contenu</span>
-            </div>
-          </div>
+
+        <div class="review-actions">
+          <button class="btn primary" id="openReviewForm">Mettre un avis</button>
         </div>
+
+        <form id="reviewForm" class="review-form hidden">
+          <input id="reviewName" type="text" placeholder="Votre nom" required />
+          <textarea id="reviewText" rows="3" placeholder="Votre avis..." required></textarea>
+          <button type="submit" class="btn primary">Envoyer</button>
+        </form>
+
+        <div id="reviewsGrid" class="review-grid"></div>
       </section>
 
-      <section class="cta-section">
+      <section id="cta-section" class="cta-section">
         <div class="cta-card glass-panel">
           <h2>Prêt à découvrir les meilleures offres ?</h2>
           <p>Explorez la boutique, choisissez vos produits préférés et profitez d’un shopping fluide.</p>
@@ -206,7 +167,7 @@
     </main>
 
     <footer>
-      <p>© <span id="year"></span> PulseCart — Commerce mobile premium</p>
+      <p>© <span id="year"></span> <span id="footerBrandName">PulseCart</span> — Commerce mobile premium</p>
     </footer>
 
     <div class="admin-modal" id="adminModal">
@@ -220,7 +181,7 @@
         </form>
         <p class="admin-error" id="adminError"></p>
 
-        <form id="adminProductForm" class="admin-form hidden">
+        <form id="adminProductForm" class="admin-form hidden" enctype="multipart/form-data">
           <label for="productName">Nom du produit</label>
           <input id="productName" type="text" placeholder="Ex: AirPods Pro" required />
 
@@ -246,6 +207,11 @@
 
           <button type="submit" class="btn primary">Ajouter le produit</button>
         </form>
+
+        <div id="adminReviewSection" class="admin-review-section hidden">
+          <h4>Gérer les avis</h4>
+          <div id="adminReviewsList" class="admin-reviews-list"></div>
+        </div>
       </div>
     </div>
 
