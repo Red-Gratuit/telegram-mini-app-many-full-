@@ -108,6 +108,7 @@ async function loadProducts() {
     products.forEach((product) => {
       const card = document.createElement('article');
       card.className = 'shop-card';
+      card.dataset.productId = String(product.id);
       const isVideo = product.media && /\.(mp4|webm|ogg)$/i.test(product.media);
       card.innerHTML = `
         <div class="shop-badge">${product.category === 'dur' ? 'Dur' : 'Doux'}</div>
@@ -125,6 +126,71 @@ async function loadProducts() {
       `;
       productsGrid.appendChild(card);
     });
+
+    // Détails produit (modal)
+    const modal = document.getElementById('productModal');
+    const closeBtn = document.getElementById('closeProductModal');
+    const titleEl = document.getElementById('productModalTitle');
+    const descEl = document.getElementById('productModalDescription');
+    const priceEl = document.getElementById('productModalPrice');
+    const catEl = document.getElementById('productModalCategory');
+    const mediaEl = document.getElementById('productModalMedia');
+
+    if (modal && closeBtn && titleEl && descEl && priceEl && catEl && mediaEl) {
+      const openModalWithProduct = (product) => {
+        titleEl.textContent = product.name || '';
+        descEl.textContent = product.description || '';
+        priceEl.textContent = `${Number(product.price).toFixed(2)}€`;
+        catEl.textContent = product.category === 'dur' ? 'Dur' : 'Doux';
+
+        const isVideo = product.media && /\.(mp4|webm|ogg)$/i.test(product.media);
+        if (isVideo) {
+          mediaEl.innerHTML = `<video class="product-modal-media-el" src="${product.media}" controls playsinline></video>`;
+        } else if (product.media) {
+          mediaEl.innerHTML = `<img class="product-modal-media-el" src="${product.media}" alt="${product.name}" />`;
+        } else {
+          mediaEl.innerHTML = `<div class="product-modal-media-placeholder">${product.emoji || '🛍️'}</div>`;
+        }
+
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+      };
+
+      // Events: fermeture
+      const closeModal = () => {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+      };
+
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+      });
+
+      // click sur toute la carte (sauf bouton Ajouter)
+      productsGrid.querySelectorAll('.shop-card').forEach((card) => {
+        card.addEventListener('click', (e) => {
+          const addBtn = e.target.closest('.shop-footer button');
+          if (addBtn) return;
+
+          const id = Number(card.dataset.productId);
+          const product = products.find((p) => Number(p.id) === id);
+          if (product) openModalWithProduct(product);
+        });
+      });
+
+      // si tu veux: bouton Ajouter dans la modal
+      const addModalBtn = document.getElementById('productModalAddBtn');
+      if (addModalBtn) {
+        addModalBtn.addEventListener('click', () => {
+          // placeholder: on ferme la modal pour l’instant
+          closeModal();
+        });
+      }
+    }
   } catch (error) {
     if (productsGrid) {
       productsGrid.innerHTML = '<p>Impossible de charger les produits.</p>';

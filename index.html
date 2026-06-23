@@ -75,28 +75,36 @@
                 <div class="avatar">P</div>
               </div>
 
-              <div class="search-pill">Rechercher un produit</div>
+             
 
-              <div class="product-highlight">
-                <div>
-                  <h4>Produit phare</h4>
-                  <p>Sélection du moment</p>
+              <div class="phone-snap-encadre hidden">
+                <div class="snap-label">Mon snap</div>
+                <div class="snap-handle">secteur62baba1</div>
+                <a
+                  class="btn snap-btn"
+                  href="https://www.snapchat.com/add/secteur62baba1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Ouvrir mon Snap
+                </a>
+
+                <div class="order-policy-card">
+                  <div class="order-policy-title">✅ Comment ça marche</div>
+                  <ul class="order-policy-list">
+                    <li>📩 Toutes vos commandes passent par <strong>Snap</strong> ou <strong>Telegram</strong>.</li>
+                    <li>🔎 Vérification : <strong>paiement</strong> + <strong>adresse</strong>.</li>
+                    <li>📦 Livraison : suivi <strong>sur place</strong> ou <strong>en livraison</strong>.</li>
+                  </ul>
+                  <div class="order-policy-note">Astuce : envoyez tout en 1 message, on s’occupe du reste.</div>
                 </div>
-                <span class="price">199€</span>
               </div>
 
-              <div class="product-row">
-                <div class="product-tile">
-                  <div class="tile-icon">⌚</div>
-                  <h5>Montre</h5>
-                  <span>129€</span>
-                </div>
-                <div class="product-tile">
-                  <div class="tile-icon">🎧</div>
-                  <h5>Casque</h5>
-                  <span>89€</span>
+                  </p>
                 </div>
               </div>
+
+
             </div>
           </div>
         </div>
@@ -169,6 +177,27 @@
     <footer>
       <p>© <span id="year"></span> <span id="footerBrandName">PulseCart</span> — Commerce mobile premium</p>
     </footer>
+
+    <div class="product-modal" id="productModal" aria-hidden="true">
+      <div class="product-modal-panel glass-panel" role="dialog" aria-modal="true" aria-labelledby="productModalTitle">
+        <button class="product-modal-close" id="closeProductModal" aria-label="Fermer">×</button>
+
+        <div class="product-modal-media" id="productModalMedia"></div>
+
+        <div class="product-modal-body">
+          <div class="product-modal-badge" id="productModalCategory"></div>
+          <h3 id="productModalTitle"></h3>
+          <p class="product-modal-description" id="productModalDescription"></p>
+
+          <div class="product-modal-footer">
+            <strong class="product-modal-price" id="productModalPrice"></strong>
+            <div class="product-modal-actions">
+              <button class="btn secondary" id="productModalAddBtn" type="button">Ajouter</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="admin-modal" id="adminModal">
       <div class="admin-panel glass-panel">

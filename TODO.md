@@ -1,10 +1,4 @@
-- [x] Modifier `server.js` : ajouter `DELETE /api/products/:id`
-- [x] Modifier `index.html` : ajouter une section admin pour lister les produits + boutons Supprimer
-- [x] Modifier `script.js` : charger les produits dans l’admin + handler click de suppression
-- [ ] Tester manuellement : ajout produit puis suppression produit via panel admin
-- [x] Ajouter musique de fond (audio loop) + controls (volume/pause/stop/reprendre) :
-  - [x] Modifier `index.html` (audio + UI)
-  - [x] Modifier `script.js` (logique play/pause/stop + volume + stockage)
-  - [x] Modifier `style.css` (style widget audio)
-  - [ ] Ajouter fichier audio `audio/background.mp3` dans le projet
-- [ ] Tester manuellement : play autorisé (débloquer au 1er clic si nécessaire), volume, pause, stop/reprendre
+- [x] Ajouter la modal détails produit dans index.html
+- [x] Rendre les cartes produits cliquables et remplir la modal dans script.js
+- [x] Ajouter le CSS de la modal + styles cliquables dans style.css
+- [x] Tester : ouvrir la modal en cliquant sur une carte, fermeture OK (croix + clic fond + ESC)

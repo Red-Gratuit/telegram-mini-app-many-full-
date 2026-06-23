@@ -377,6 +377,44 @@ nav a:hover {
   justify-content: center;
 }
 
+/* Snap dans le téléphone */
+.phone-snap-encadre {
+  display: flex !important;
+  flex-direction: column;
+  gap: 10px;
+  margin: 18px 0;
+  padding: 16px 16px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+
+
+.snap-label {
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.snap-handle {
+  font-weight: 900;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  color: var(--text);
+}
+
+.snap-btn {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #fffc00, #ff6b00);
+  color: #1a1400;
+  text-decoration: none;
+  font-weight: 900;
+}
+
 .phone-frame {
   position: relative;
   width: 360px;
@@ -749,7 +787,16 @@ nav a:hover {
   border-radius: 24px;
   padding: 18px;
   border: 1px solid rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
+
+.shop-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 255, 255, 0.22);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 18px 45px rgba(0, 0, 0, 0.25);
+}
+
 
 .shop-card.featured {
   transform: translateY(-10px);
@@ -1050,6 +1097,41 @@ footer {
   color: var(--muted);
 }
 
+/* Card "Comment ça marche" dans le téléphone */
+.order-policy-card {
+  margin-top: 10px;
+  padding: 12px 12px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.order-policy-title {
+  font-weight: 900;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.order-policy-list {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.order-policy-list li {
+  color: var(--muted);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.order-policy-note {
+  margin-top: 10px;
+  color: rgba(0, 255, 255, 0.9);
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+
 /* Audio de fond */
 .bg-audio-widget {
   position: fixed;
@@ -1159,6 +1241,106 @@ footer {
   }
 }
 
+.product-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 9, 20, 0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 120;
+  backdrop-filter: blur(10px);
+}
+
+.product-modal.open {
+  display: flex;
+}
+
+.product-modal-panel {
+  width: min(720px, 92%);
+  max-height: 86vh;
+  overflow: auto;
+  border-radius: 28px;
+  padding: 26px;
+}
+
+.product-modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.product-modal-media {
+  width: 100%;
+  max-height: 360px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.product-modal-media-el {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  display: block;
+}
+
+.product-modal-media-placeholder {
+  height: 360px;
+  display: grid;
+  place-items: center;
+  font-size: 3rem;
+}
+
+.product-modal-body {
+  margin-top: 16px;
+}
+
+.product-modal-badge {
+  display: inline-flex;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0, 255, 255, 0.10);
+  color: var(--cyan);
+  font-weight: 800;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}
+
+.product-modal-description {
+  margin-top: 8px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.product-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.product-modal-price {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.product-modal-actions {
+  display: flex;
+  gap: 10px;
+}
+
 @media (max-width: 640px) {
   .top-nav {
     width: 96%;
@@ -1225,6 +1407,13 @@ footer {
     height: 620px;
   }
 
+/* (on garde le snap visible partout) */
+  .phone-snap-encadre.hidden {
+    display: flex !important;
+  }
+
+
+
   .phone-screen {
     padding: 44px 14px 14px;
   }
@@ -1235,21 +1424,44 @@ footer {
     font-size: 0.86rem;
   }
 
-  .product-highlight {
-    min-height: 110px;
-    padding: 14px;
+  .product-highlight,
+  .product-row {
+    display: none !important;
   }
 
-  .product-highlight h4 {
-    font-size: 1.1rem;
+  .phone-snap-encadre {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 12px 0;
+    padding: 16px 16px;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
 
-  .product-highlight p {
-    font-size: 0.88rem;
+  .snap-label {
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 0.9rem;
   }
 
-  .product-highlight .price {
+  .snap-handle {
+    font-weight: 900;
     font-size: 1.2rem;
+    letter-spacing: 0.02em;
+    color: var(--text);
+  }
+
+  .snap-btn {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #fffc00, #ff6b00);
+    color: #1a1400;
+    text-decoration: none;
+    font-weight: 900;
   }
 
   .shop-panel,
@@ -1259,6 +1471,7 @@ footer {
   .review-card {
     padding: 22px;
   }
+
 
   .product-row,
   .mini-cards {
