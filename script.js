@@ -86,6 +86,12 @@ function updateViewFromHash() {
 window.addEventListener('hashchange', updateViewFromHash);
 updateViewFromHash();
 
+function isVideoProduct(product) {
+  if (product.mediaType === 'video') return true;
+  if (!product.media) return false;
+  return /\.(mp4|webm|ogg|ogv|mov|qt|mkv|avi|m4v|3gp|3g2|flv|f4v)$/i.test(product.media);
+}
+
 async function loadProducts() {
   if (!productsGrid) return;
 
@@ -109,7 +115,7 @@ async function loadProducts() {
       const card = document.createElement('article');
       card.className = 'shop-card';
       card.dataset.productId = String(product.id);
-      const isVideo = product.media && /\.(mp4|webm|ogg)$/i.test(product.media);
+      const isVideo = isVideoProduct(product);
       card.innerHTML = `
         <div class="shop-badge">${product.category === 'dur' ? 'Dur' : 'Doux'}</div>
         ${isVideo
@@ -143,7 +149,7 @@ async function loadProducts() {
         priceEl.textContent = `${Number(product.price).toFixed(2)}€`;
         catEl.textContent = product.category === 'dur' ? 'Dur' : 'Doux';
 
-        const isVideo = product.media && /\.(mp4|webm|ogg)$/i.test(product.media);
+        const isVideo = isVideoProduct(product);
         if (isVideo) {
           mediaEl.innerHTML = `<video class="product-modal-media-el" src="${product.media}" controls playsinline></video>`;
         } else if (product.media) {

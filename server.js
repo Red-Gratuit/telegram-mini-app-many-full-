@@ -70,6 +70,11 @@ app.post('/api/products', upload.single('media'), (req, res) => {
 
   const products = loadProducts();
 
+  const isVideoFile = req.file && (
+    (req.file.mimetype && req.file.mimetype.startsWith('video')) ||
+    /\.(mp4|webm|ogg|ogv|mov|qt|mkv|avi|m4v|3gp|3g2|flv|f4v)$/i.test(req.file.originalname || '')
+  );
+
   const newProduct = {
     id: Date.now(),
     name,
@@ -77,7 +82,8 @@ app.post('/api/products', upload.single('media'), (req, res) => {
     emoji: emoji || '🛍️',
     category,
     description: description || '',
-    media: req.file ? `/uploads/${req.file.filename}` : ''
+    media: req.file ? `/uploads/${req.file.filename}` : '',
+    mediaType: req.file ? (isVideoFile ? 'video' : 'image') : ''
   };
 
   products.push(newProduct);
