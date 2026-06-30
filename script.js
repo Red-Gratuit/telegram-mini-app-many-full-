@@ -60,10 +60,26 @@ function updateTelegramBranding() {
   document.title = `${displayName} • PulseCart`;
 }
 
+function initTelegramWebApp() {
+  if (window.Telegram?.WebApp) {
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+    tg.expand();
+  }
+}
+
 window.updateTelegramBranding = updateTelegramBranding;
+
+initTelegramWebApp();
 updateTelegramBranding();
-window.addEventListener('load', updateTelegramBranding);
-setTimeout(updateTelegramBranding, 300);
+window.addEventListener('load', () => {
+  initTelegramWebApp();
+  updateTelegramBranding();
+});
+setTimeout(() => {
+  initTelegramWebApp();
+  updateTelegramBranding();
+}, 300);
 
 function updateViewFromHash() {
   const hash = window.location.hash.replace('#', '') || 'home';
