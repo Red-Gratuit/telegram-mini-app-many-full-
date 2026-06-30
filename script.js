@@ -618,18 +618,13 @@ if (bgMusic && bgAudioWidget) {
   bgMusic.addEventListener('pause', () => setWidgetState({ playing: false }));
   bgMusic.addEventListener('ended', () => setWidgetState({ playing: false }));
 
-  // Débloquer au premier clic/tap (autoplay policy) pour lancer la musique au 1er "clique"
-  let audioUnlocked = false;
-
+  // Lance la musique au premier clic/tap n'importe où sur la page (politique autoplay)
   window.addEventListener(
     'pointerdown',
     () => {
-      if (audioUnlocked) return;
-      // Si l'audio est déjà en lecture (ou prêt à être en lecture), ne rien faire.
-      if (!bgMusic || !bgMusic.paused) return;
-
-      audioUnlocked = true;
-      tryPlay();
+      if (bgMusic.paused) {
+        tryPlay();
+      }
     },
     { once: true }
   );
