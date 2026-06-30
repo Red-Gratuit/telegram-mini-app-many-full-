@@ -135,7 +135,7 @@ async function loadProducts() {
       card.innerHTML = `
         <div class="shop-badge">${product.category === 'dur' ? 'Dur' : 'Doux'}</div>
         ${isVideo
-          ? `<video class="product-media" src="${product.media}" controls playsinline></video>`
+          ? `<video class="product-media" src="${product.media}" autoplay muted loop playsinline></video>`
           : product.media
             ? `<img class="product-media" src="${product.media}" alt="${product.name}" />`
             : `<div class="product-media placeholder">${product.emoji || '🛍️'}</div>`}
@@ -167,7 +167,7 @@ async function loadProducts() {
 
         const isVideo = isVideoProduct(product);
         if (isVideo) {
-          mediaEl.innerHTML = `<video class="product-modal-media-el" src="${product.media}" controls playsinline></video>`;
+          mediaEl.innerHTML = `<video class="product-modal-media-el" src="${product.media}" autoplay muted loop playsinline controls></video>`;
         } else if (product.media) {
           mediaEl.innerHTML = `<img class="product-modal-media-el" src="${product.media}" alt="${product.name}" />`;
         } else {
